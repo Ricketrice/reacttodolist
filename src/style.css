@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainBody {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+}
+
+.sideBar {
+    background-color: #2C3E50;
+    height: 100%;
+}
+
+.taskBar {
+    background-color: #ECF0F1;
+}
+
+.todoTitle {
+    margin: 10px;
+}
+
+.titleDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+form {
+    background-color: #f5f5f5; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    max-width: 400px; 
+    margin: 20px auto;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(163, 160, 160, 0.678);
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+label {
+    margin-top: 5px;
+}
+
+input, select {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.taskContainer {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+
+.item {
+    background-color: #f9f9f9; 
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.completed {
+    width: auto;
+    margin: 0;
+}
+
+.completed1 {
+    display: flex;
+}
+
+.completed, input{
+    margin-left: 10px;
+}
+
+.completedName {
+    margin: 0;   
+}
+
+.completedUI {
+
+}
+
+.completedUI input {
+    width: auto;
+    margin: 0;
+    margin-left: 5px;
+    align-self: center;
+}
