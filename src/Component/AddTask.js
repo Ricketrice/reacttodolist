@@ -1,9 +1,77 @@
 import React, { useEffect, useState } from 'react'
 import { MdDelete } from "react-icons/md";
-
+import axios from 'axios';
 
 
 const AddTask = () => {
+  const apiUrl = 'https://v1clxf98z9.execute-api.ap-southeast-2.amazonaws.com/dev/tasks';
+
+
+
+
+
+
+  
+
+
+  // const fetchTask = async () => {
+  //   try {
+  //     const reponse = await fetch("https://v1clxf98z9.execute-api.ap-southeast-2.amazonaws.com/dev/tasks", {
+  //       method: 'GET'
+  //     });
+  //     if (!reponse.ok) {
+  //       console.log("Server error:", reponse.status);
+  //       return;
+  //     }
+
+  //     const data = await reponse.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.log("Fetch Error: ", error);
+  //   }
+
+  // }
+
+  // const addtask = async (task) => {
+  //   const reponse = await fetch("https://v1clxf98z9.execute-api.ap-southeast-2.amazonaws.com/dev/tasks", {
+  //     method: 'POST',
+  //     headers: {
+  //     "Content-Type": "application/json"   
+  //     },
+  //     body: JSON.stringify(task)
+
+      
+  //   });
+
+  //   const data = await reponse.json();
+  //   return data;
+
+  // }
+
+  // const deleteTask = async (taskID) => {
+  //   const reponse = await fetch("https://v1clxf98z9.execute-api.ap-southeast-2.amazonaws.com/dev/tasks", {
+  //     method: 'DELETE',
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ id: taskID }) 
+  //   });
+
+  //   const data = await reponse.json();
+  //   return data;
+  // }
+
+  // const updateTask = async (taskID, updateData) => {
+
+  //   const reponse = await fetch("https://v1clxf98z9.execute-api.ap-southeast-2.amazonaws.com/dev/tasks", {
+  //     method: 'PUT',
+  //     body: JSON.stringify(updateData)
+
+  //   });
+
+  //   const data = await reponse.json();
+  //   return data;
+  // }
+
+
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const [mainDataExport, setmainDataExport] = useState(() => {
@@ -39,16 +107,28 @@ const AddTask = () => {
     setIsFormVisible(true);
   }
   
-  function Submission(event) {
+  async function Submission(event) {
     currentTime();
+    console.log("im clicked");
     event.preventDefault();
     const newTask = {
       ...taskData,
       realDate: currentTime()
     };
+
+    try {
+      const createTask = await addtask(newTask);
+      
+      console.log("Server created", createTask);
+    } catch (error) {
+      console.log("Error occur", error);
+    }
+
     setmainDataExport([...mainDataExport, newTask]);
     settaskData({ taskname: "", dueDate: "", priority: "", realDate:"", completed: false})
     setIsFormVisible(false);
+
+
   }
 
   function handleChange(e) {
@@ -60,14 +140,18 @@ const AddTask = () => {
     }));
     }
  
-    console.log('Changing', name, 'to', value); 
+    // console.log('Changing', name, 'to', value); 
     settaskData(somethingData => ({
       ...somethingData,   [name]:value}));
   }
 
   function deleteTodo(key) {
     const updateTask = mainDataExport.filter(task => task.taskname !==key);
+    deleteTask(key)
+    .then(a => console.log("Delete from server", a))
+    .catch(b => console.log("Delete error:", b));
     setmainDataExport(updateTask);
+    
   }
 
   useEffect(() => {
@@ -90,12 +174,12 @@ const AddTask = () => {
     }
 
     setmainDataExport(updateTask)
-    console.log(taskToUpdate.completed);
+    // console.log(taskToUpdate.completed);
   }
   
 
 
-console.log('Initial state:', taskData);
+// console.log('Initial state:', taskData);
   return (
     <>
     
@@ -122,14 +206,14 @@ console.log('Initial state:', taskData);
               </select><br></br>
 
               <div className='completed1'>
-              <label className= "completed completedName" for="completed">Completed </label><br></br>
+              <label className= "completed completedName" htmlFor="completed">Completed </label><br></br>
               <input checked={taskData.completed} onChange={handleChange} className= "completed" type="checkbox" id="completed" name="completed" value="completed"></input>
               
               </div>
 
 
               <button type="button" onClick={hidden}>Cancel</button>
-              <button>Submit</button>
+              <button type='submit'>Submit</button>
           </form>
           )}
       </div>
