@@ -116,13 +116,13 @@ const AddTask = () => {
       realDate: currentTime()
     };
 
-    try {
-      const createTask = await addtask(newTask);
+    // try {
+    //   const createTask = await addtask(newTask);
       
-      console.log("Server created", createTask);
-    } catch (error) {
-      console.log("Error occur", error);
-    }
+    //   console.log("Server created", createTask);
+    // } catch (error) {
+    //   console.log("Error occur", error);
+    // }
 
     setmainDataExport([...mainDataExport, newTask]);
     settaskData({ taskname: "", dueDate: "", priority: "", realDate:"", completed: false})
@@ -147,9 +147,9 @@ const AddTask = () => {
 
   function deleteTodo(key) {
     const updateTask = mainDataExport.filter(task => task.taskname !==key);
-    deleteTask(key)
-    .then(a => console.log("Delete from server", a))
-    .catch(b => console.log("Delete error:", b));
+    // deleteTask(key)
+    // .then(a => console.log("Delete from server", a))
+    // .catch(b => console.log("Delete error:", b));
     setmainDataExport(updateTask);
     
   }
